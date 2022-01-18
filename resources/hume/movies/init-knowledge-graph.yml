@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: KnowledgeGraph
+metadata:
+  name: movies-kg
+  labels:
+    cto.hume.io/tier: core
+spec:
+  label: Movies KG
+  access:
+    - role: INVESTIGATOR
+      grant_type: MANAGER
+    - role: ANALYST
+      grant_type: EXPLORER
+    - role: EXTERNAL_APP
+      grant_type: EXPLORER
+  perspectives:
+    - main-perspective
+    - external-perspective
+  workflows: []
+  actions:
+    - movies-show-matrix-actors
+    - computed-score
+    - multiselected-nodes-table
+  settings:
+    - name: visualisation_geospatial
+      value: true
+    - name: visualisation_grouping
+      value: true
+    - name: visualisation_temporal
+      value: true
+    - name: dataRefreshEnabled
+      value: true
+    - name: schemaStatisticsEnabled
+      value: true
+  schema:
+    classes:
+      - label: Movie
+        color: '#6200EA'
+        icon: mdi-movie
+        attributes:
+          - label: title
+            type: STRING
+            full_text: true
+          - label: released
+            type: INTEGER
+          - label: score
+            type: INTEGER
+      - label: Person
+        color: '#26A69A'
+        icon: person
+        attributes:
+          - label: name
+            type: STRING
+            full_text: true
+          - label: score
+            type: INTEGER
+          - label: slug
+            type: STRING
+          - label: born
+            type: integer
+    relationships:
+      - label: ACTED_IN
+        start: Person
+        end: Movie
+        attributes:
+          - label: roles
+            type: string
+            list: 'true'
+      - label: DIRECTED
+        start: Person
+        end: Movie
+      - label: PRODUCED
+        start: Person
+        end: Movie
+      - label: REVIEWED
+        start: Person
+        end: Movie

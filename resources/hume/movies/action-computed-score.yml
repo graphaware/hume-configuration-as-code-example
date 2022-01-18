@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: computed-score
+  tags:
+    - all
+    - scoring
+spec:
+  label: 'Computed score'
+  query: |
+    RETURN 10 AS score, $id AS id
+  scope: COMPUTED_ATTRIBUTE
+  returnType: GRAPH
+  inclusions:
+    labels: ['Movie']
+

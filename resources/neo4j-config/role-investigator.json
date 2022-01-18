@@ -1,0 +1,34 @@
+{
+    "kind": "Role",
+    "name": "investigator",
+    "dropIfExists": true,
+    "privileges": [
+      {
+        "graph": "movies",
+        "access": true,
+        "rules": [
+          {
+            "target": "node",
+            "labels": "*",
+            "action": "match",
+            "resource": "all_properties",
+            "access": "GRANTED"
+          },
+          {
+            "target": "relationship",
+            "labels": "*",
+            "action": "read",
+            "resource": "*",
+            "access": "GRANTED"
+          },
+          {
+            "target": "relationship",
+            "labels": "*",
+            "action": "traverse",
+            "resource": "*",
+            "access": "GRANTED"
+          }
+        ]
+      }
+    ]
+  }

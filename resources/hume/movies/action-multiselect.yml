@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: multiselected-nodes-table
+  tags:
+    - all
+    - graphql
+spec:
+  label: 'Multiselected Nodes Info As Table'
+  query: |
+    MATCH (n)
+    WHERE id(n) IN $ids
+    RETURN n{.*} AS data
+  inclusions:
+    labels: ['*']
+  selection: nodeIds
+  scope: MULTISELECTION
+  returnType: TABLE

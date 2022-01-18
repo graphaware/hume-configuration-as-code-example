@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Perspective
+metadata:
+  name: external-perspective
+spec:
+  label: External Perspective
+  access:
+    - role: INVESTIGATOR
+      grant_type: PERSPECTIVE_USE
+    - role: EXTERNAL_APP
+      grant_type: PERSPECTIVE_USE
+  resource:
+    selector:
+      name: neo4j-movies
+  synced: true
+  actions:
+    include:
+      - tag@graphql

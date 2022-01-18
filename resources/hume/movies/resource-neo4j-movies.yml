@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: EcosystemResource
+metadata:
+  name: neo4j-movies
+  labels:
+    cto.hume.io/tier: core
+spec:
+  access:
+    - role: ANALYST
+      grant_type: RESOURCE_USE
+    - role: EXTERNAL_APP
+      grant_type: RESOURCE_USE
+    - role: INVESTIGATOR
+      grant_type: RESOURCE_USE
+  fqn: Hume.Orchestra.Resource.Neo4j
+  parameters:
+    - name: host
+      value: neo4j
+    - name: port
+      value: 7687
+    - name: user
+      value: neo4j
+    - name: password
+      value: ${env:NEO4J_DB_PASSWORD}
+    - name: database
+      value: movies
