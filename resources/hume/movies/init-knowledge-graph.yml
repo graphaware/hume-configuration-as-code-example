@@ -16,7 +16,8 @@ spec:
   perspectives:
     - main-perspective
     - external-perspective
-  workflows: []
+  workflows:
+    - workflow-neo4j-basic
   actions:
     - movies-show-matrix-actors
     - computed-score
