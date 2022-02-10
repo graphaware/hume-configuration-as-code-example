@@ -33,10 +33,15 @@ services:
     ports:
       - 8100:8100
       - 8666:8666
-    volumes:
-      - ${HUME_PUBLIC_DIR:-./public}:/data
     environment:
       - orchestra.startup.workflows.autoload=true
+      - hume.security.encryption.engine=keystore
+      - hume.security.encryption.keystore.file=/opt/hume-keystore
+      - hume.security.encryption.keystore.password=changeit
+      - hume.security.encryption.keystore.secret.alias=secret
+    volumes:
+      - ${HUME_PUBLIC_DIR:-./public}:/data
+      - "./resources/keystore/hume-keystore:/opt/hume-keystore"
   api:
     image: docker.graphaware.com/public/hume-api:${HUME_VERSION}
     ports:
@@ -60,8 +65,13 @@ services:
       - hume.config-as-code.autoload=true
       - GRAPHQL_KEY_TOKEN=${API_KEY_SECRET}
       - NEO4J_DB_PASSWORD=${NEO4J_PASSWORD}
+      - hume.security.encryption.engine=keystore
+      - hume.security.encryption.keystore.file=/opt/hume-keystore
+      - hume.security.encryption.keystore.password=changeit
+      - hume.security.encryption.keystore.secret.alias=secret
     volumes: 
       - "./resources/hume:/init"
+      - "./resources/keystore/hume-keystore:/opt/hume-keystore"
   web:
     image: docker.graphaware.com/public/hume-web:${HUME_VERSION}
     environment:
